@@ -1,11 +1,18 @@
 import Layout from "../../components/layout";
 import { getItems } from "../../services/itemService";
+import Product from "../../components/product";
+import styleItems from "../../styles/product.module.css"
 
-export default function Index({ items }) {
+export default function Index({ products }) {
   return (
     <Layout>
       <h1>Store</h1>
-      {items && items.map((item) => <div key={item.id}>{item.title}</div>)}
+      <div className={styleItems.items}>
+        {products &&
+          products.map((item) => (
+            <Product key={item.id} item={item} showAs="Default" />
+          ))}
+      </div>
     </Layout>
   );
 }
@@ -15,7 +22,7 @@ export async function getStaticProps() {
 
   return {
     props: {
-      items: res,
+      products: res,
     },
   };
 }
